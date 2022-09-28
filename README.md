@@ -15,10 +15,8 @@ After clone the project, run the command from on Terminal:
 
     ./vendor/bin/sail up -d
 
-Run the migration command and populate your tables
+Run the migration command to create your tables
 
     ./vendor/bin/sail php artisan migrate
-
-    ./vendor/bin/sail php artisan db:seed
 
 Now you're ready.
