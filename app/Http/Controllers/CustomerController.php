@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -28,14 +30,33 @@ class CustomerController extends Controller
     }
 
 
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $contents = $request->file('file')->get();
+        $lines = explode(PHP_EOL,$contents);
+        unset($lines[0]); //removendo cabeçalho
+        foreach ($lines as $line){
+            $datas = explode(",",$line);
+            $new = [];
+            $new['id'] = $datas[0];
+            $new['first_name'] = $datas[1];
+            $new['last_name'] = $datas[2];
+            $new['email'] = $datas[3];
+            $new['gender'] = $datas[4];
+            $new['ip_address'] = $datas[5];
+            $new['company'] = $datas[6];
+            $new['city'] = $datas[7];
+            $new['title'] = $datas[8];
+            $new['website'] = $datas[9];
+            Customer::create($new);
+        }
+        return redirect()->route('home')->with(['success'=>'Integrated with success']);
     }
 
     public function integrate()
     {
-        //
+        $contents = Storage::get('customers.csv');
+        ddd($contents);
     }
 
     /**

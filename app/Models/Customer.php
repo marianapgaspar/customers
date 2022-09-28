@@ -25,14 +25,14 @@ class Customer extends Model
     ];
 
     public function table(){
-        $table = DB::table("customers")->get();
+        $table = DB::table("customers")->paginate(10);
         return $table;
     }
     public function getWithoutLastName(){
-        return DB::table("customers")->whereNull("last_name")->count();
+        return DB::table("customers")->where("last_name","=","")->count();
     }
     public function getLastName(){
-        return DB::table("customers")->whereNotNull("last_name")->count();
+        return DB::table("customers")->where("last_name","<>","")->count();
     }
     public function getValidEmail(){
         return DB::table("customers")->where("email","like","%@%")->count();
@@ -41,9 +41,9 @@ class Customer extends Model
         return DB::table("customers")->where("email","not like","%@%")->count();
     }
     public function getWithoutGender(){
-        return DB::table("customers")->whereNull("gender")->count();
+        return DB::table("customers")->where("gender","=","")->count();
     }
     public function getGender(){
-        return DB::table("customers")->whereNotNull("gender")->count();
+        return DB::table("customers")->where("gender","<>","")->count();
     }
 }

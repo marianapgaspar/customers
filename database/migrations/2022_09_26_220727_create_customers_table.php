@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('company',120)->nullable();
             $table->string('city',75)->nullable();
             $table->string('title',120)->nullable();
-            $table->string('website',120)->nullable();
+            $table->longText('website')->nullable();
             $table->timestamps();
         });
     }

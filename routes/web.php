@@ -16,4 +16,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [CustomerController::class, 'index'])->name('home');
 Route::post('create', [CustomerController::class, 'create'])->name('create');
-Route::post('integrate', [CustomerController::class, 'integrate'])->name('integrate');
